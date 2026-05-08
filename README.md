@@ -1,35 +1,35 @@
-# ☸️ Cluster Lab: Orquestación de Kubernetes con Kubespray (En proceso)
+# ☸️ Cluster Builder: Implementación de Kubernetes con Kubespray
 
-## 1. Presentación del Proyecto
-Este proyecto consiste en el despliegue de un clúster de Kubernetes de grado industrial utilizando **Kubespray**. A diferencia de las soluciones gestionadas o ligeras, Kubespray ofrece un control total sobre la infraestructura, permitiendo configurar cada componente del clúster (etcd, red, certificados y runtime) desde cero.
-
-El objetivo es demostrar la capacidad de gestionar **Infraestructura como Código (IaC)** para levantar un entorno de orquestación reproducible, seguro y escalable.
-
+Este proyecto demuestra la implementación de un clúster de Kubernetes de grado industrial, gestionado íntegramente como **Infraestructura como Código (IaC)**. Utilizando **Kubespray**, hemos automatizado el despliegue sobre nodos simulados, garantizando un entorno seguro, escalable y reproducible.
 
 ---
 
-## 2. ¿Qué es Kubespray y por qué usarlo?
-**Kubespray** es una composición de **Ansible Playbooks**, inventarios y herramientas de aprovisionamiento orientadas a la implementación de clústeres de Kubernetes en entornos *On-Premise* o nubes privadas.
+## 📋 Resumen del Proyecto
+El objetivo principal es transformar nodos Linux aislados en un clúster coordinado. A diferencia de las soluciones automáticas, este método permite un control total sobre la red, los certificados y los componentes internos del sistema.
 
-### Ventajas de este enfoque:
-* **Basado en Ansible:** Despliegue sin agentes (*Agentless*) a través de SSH.
-* **Altamente personalizable:** Permite elegir el CNI (Calico, Flannel, Cilium), el Runtime (Containerd, Docker) y la topología de red.
-* **Idempotencia:** El pipeline de despliegue puede ejecutarse múltiples veces garantizando que el estado final sea siempre el definido en el inventario.
-
----
-
-## 3. Arquitectura del Laboratorio
-Para este laboratorio técnico, se ha simulado un entorno de servidores reales utilizando contenedores Linux con **Systemd** habilitado, organizados de la siguiente manera:
-
-| Nodo | Rol | IP Interna | Componentes Clave |
-| :--- | :--- | :--- | :--- |
-| **k8s-master** | Control Plane | 10.0.0.10 | kube-apiserver, etcd, scheduler |
-| **k8s-worker-1** | Worker | 10.0.0.11 | kubelet, kube-proxy, containerd |
-| **k8s-worker-2** | Worker | 10.0.0.12 | kubelet, kube-proxy, containerd |
-
+* **Arquitectura:** 1 Nodo Master (Control Plane) + 2 Nodos Workers.
+* **Motor de Despliegue:** Ansible (Kubespray Playbooks).
+* **Networking:** Red Overlay gestionada por **Calico**.
+* **Runtime de Contenedores:** **Containerd**.
 
 ---
 
-## 4. Despliegue con Ansible (IaC)
-El despliegue se realiza de forma declarativa definiendo un inventario en YAML. El proceso automatiza la generación de la **Autoridad de Certificación (CA)**, el firmado de certificados TLS para todos los componentes y la configuración de la red Overlay (Calico).
+## 🛠️ Guía de Implementación por Fases
 
+A continuación, se detalla el proceso técnico dividido en etapas lógicas. Haz clic en cada fase para expandir la información:
+
+<details>
+<summary><b>📍 Fase 1: Aprovisionamiento y Preparación de Nodos</b></summary>
+
+### Simulación de Servidores Reales
+Para este laboratorio, se han utilizado contenedores Docker optimizados para actuar como servidores físicos.
+* **Imagen base:** `jrei/systemd-ubuntu:22.04` (Permite el uso de `systemd` para gestionar los servicios de K8s).
+* **Requisitos:** Acceso SSH configurado y Python instalado en los nodos para permitir la ejecución de los módulos de Ansible.
+
+```yaml
+# Estructura básica de los nodos en el host
+services:
+  k8s-master:
+    privileged: true
+    networks:
+      k8s-net: { ipv4_address: 10.0.0.10 }
