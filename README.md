@@ -17,28 +17,34 @@ El objetivo es transformar nodos Linux aislados en un clúster de orquestación 
 ## 🗺️ Esquema Visual del Despliegue
 
 ```mermaid
-graph TD
-    subgraph GitHub_Actions [Automatización]
-        A[Git Push / Manual Trigger] --> B[Playbook de Ansible]
+graph TB
+    %% Definición de Estilos Neón
+    classDef master fill:#1e293b,stroke:#22d3ee,stroke-width:4px,color:#fff,rx:10,ry:10;
+    classDef worker fill:#1e293b,stroke:#818cf8,stroke-width:2px,color:#fff,rx:10,ry:10;
+    classDef ansible fill:#0f172a,stroke:#fbbf24,stroke-width:2px,color:#fbbf24,stroke-dasharray: 5 5;
+
+    subgraph Control_Plane [Estación de Control]
+        A((fa:fa-terminal Ansible Control)):::ansible
     end
 
-    subgraph Security_Layer [Capa de Seguridad]
-        B --> C{Certificados TLS}
-        C -->|Firma CA| D[Nodos Blindados]
+    subgraph Cluster [Kubernetes Cluster]
+        direction LR
+        M[fa:fa-brain Master Node<br/>10.0.0.10]:::master
+        W1[fa:fa-gears Worker 1<br/>10.0.0.11]:::worker
+        W2[fa:fa-gears Worker 2<br/>10.0.0.12]:::worker
     end
 
-    subgraph Infrastructure [Nodos en Docker]
-        D --> Node1[Master: 10.0.0.10]
-        D --> Node2[Worker 1: 10.0.0.11]
-        D --> Node3[Worker 2: 10.0.0.12]
-    end
+    %% Conexiones de Despliegue
+    A -- "SSH + Kubespray" --> M
+    A -- "SSH + Kubespray" --> W1
+    A -- "SSH + Kubespray" --> W2
 
-    subgraph Networking [CNI Calico]
-        Node1 <--> Node2
-        Node2 <--> Node3
-        Node3 <--> Node1
-    end
+    %% Red Interna Calico
+    M <--> |Calico BGP| W1
+    W1 <--> |Calico BGP| W2
+    W2 <--> |Calico BGP| M
 
-    style GitHub_Actions fill:#0d1117,stroke:#22d3ee,stroke-width:2px
+    linkStyle 0,1,2 stroke:#fbbf24,stroke-width:2px;
+    linkStyle 3,4,5 stroke:#22d3ee,stroke-width:3px;
     style Infrastructure fill:#0d1117,stroke:#22d3ee,stroke-width:2px
     style Networking fill:#0d1117,stroke:#22d3ee,stroke-width:4px
