@@ -15,3 +15,4 @@ El objetivo es transformar nodos Linux aislados en un clúster de orquestación 
 ---
 
 ## 🗺️ Esquema Visual del Despliegue
+<img width="615" height="630" alt="image" src="https://github.com/user-attachments/assets/06972385-8d5d-4682-a323-7946a1736592" />
