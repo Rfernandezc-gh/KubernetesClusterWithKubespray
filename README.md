@@ -1,4 +1,4 @@
-##☸️ Cluster Builder: Kubernetes Industrial con Kubespray
+## ☸️ Cluster Builder: Kubernetes Industrial con Kubespray
 
 Este proyecto demuestra la implementación de un clúster de Kubernetes de grado industrial, gestionado íntegramente como **Infraestructura como Código (IaC)**. Utilizando **Kubespray**, se ha automatizado el despliegue sobre nodos inmutables, garantizando un entorno seguro, escalable y profesional.
 
