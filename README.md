@@ -1,4 +1,4 @@
-<img width="800" height="650" alt="gemini-svg" src="https://github.com/user-attachments/assets/9c3c1ae0-328e-4aba-ab76-3a5cfd0dc82a" /># ☸️ Cluster Builder: Kubernetes Industrial con Kubespray
+☸️ Cluster Builder: Kubernetes Industrial con Kubespray
 
 Este proyecto demuestra la implementación de un clúster de Kubernetes de grado industrial, gestionado íntegramente como **Infraestructura como Código (IaC)**. Utilizando **Kubespray**, se ha automatizado el despliegue sobre nodos inmutables, garantizando un entorno seguro, escalable y profesional.
 
@@ -15,7 +15,8 @@ El objetivo es transformar nodos Linux aislados en un clúster de orquestación 
 ---
 
 ## 🗺️ Esquema Visual del Despliegue
-![Uploading g<svg width="800" height="650" viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg">
+<img width="800" height="650" alt="gemini-svg" src="https://github.com/user-attachments/assets/0d632852-615e-466f-b06c-631b4b9e3db8" />
+![Uploading gemini-<svg width="800" height="650" viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@600;700&amp;display=swap');
     text { font-family: 'Urbanist', sans-serif; fill: white; text-anchor: middle; }
@@ -96,4 +97,5 @@ El objetivo es transformar nodos Linux aislados en un clúster de orquestación 
     <text x="90" y="60" font-size="12" opacity="0.7">10.0.0.12</text>
   </g>
 </svg>
-emini-svg.svg…]()
+svg.svg…]()
+
