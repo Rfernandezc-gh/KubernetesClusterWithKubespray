@@ -15,4 +15,4 @@ El objetivo es transformar nodos Linux aislados en un clúster de orquestación 
 ---
 
 ## 🗺️ Esquema Visual del Despliegue
-<img width="800" height="650" alt="gemini-svg (1)" src="https://github.com/user-attachments/assets/7b50c230-3d1a-4a2c-afea-5e5c4aad4f7a" />
+<img width="700" height="550" align="center" alt="gemini-svg (1)" src="https://github.com/user-attachments/assets/7b50c230-3d1a-4a2c-afea-5e5c4aad4f7a" />
